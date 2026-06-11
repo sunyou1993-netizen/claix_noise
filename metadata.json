@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Remix: (50%) 6.소음측정기",
+  "description": "실시간 소음측정기와 귀여운 3D 곰 마스코트를 갖춘 모바일 데시벨(dB) 측정 앱",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

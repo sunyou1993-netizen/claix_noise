@@ -1,0 +1,177 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-rounded: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  
+  --color-brand-bg: #EBF4FF;
+  --color-brand-main: #0052E0;
+  --color-green-status: #31B272;
+  --color-yellow-status: #FBBF24;
+  --color-red-status: #F87171;
+}
+
+/* Custom animated micro-movements */
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes scale-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes breath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+}
+
+@keyframes ripple-out1 {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple-out2 {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.32);
+    opacity: 0;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes wave-flow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-15%) translateY(4px);
+  }
+  100% {
+    transform: translateX(-30%) translateY(0);
+  }
+}
+
+@keyframes wave-flow-slow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(15%) translateY(-4px);
+  }
+  100% {
+    transform: translateX(30%) translateY(0);
+  }
+}
+
+.animate-wave-flow {
+  animation: wave-flow 4.5s ease-in-out infinite;
+}
+
+.animate-wave-flow-slow {
+  animation: wave-flow-slow 6.5s ease-in-out infinite;
+}
+
+.animate-gradient-mint-blue {
+  background-image: radial-gradient(circle at 30% 107%, #2dd4bf 0%, #02b3c2 45%, #0052E0 100%);
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease-in-out infinite;
+}
+
+.animate-ripple-1 {
+  animation: ripple-out1 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+.animate-ripple-2 {
+  animation: ripple-out2 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  animation-delay: 0.7s;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 3s ease-in-out infinite;
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 2s ease-in-out infinite;
+}
+
+/* Glassmorphism and specialized soft shadows */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(0, 108, 255, 0.06);
+}
+
+.glass-inset {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 2px 8px rgba(0, 100, 255, 0.03);
+}
+
+/* Neumorphic 3D styled traffic light housing */
+.traffic-housing {
+  background: #ffffff;
+  border: 2px solid rgba(0, 82, 224, 0.12);
+  box-shadow: 
+    0 8px 24px rgba(0, 82, 224, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+/* Base resets & custom scrollbars for logs */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 108, 255, 0.02);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 108, 255, 0.15);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 108, 255, 0.3);
+}
+
+body {
+  background-color: #EBF4FF;
+  font-family: var(--font-sans);
+}
