@@ -33,7 +33,7 @@
       </div>
 
       <!-- Close Action Button with 20px rounded border -->
-      <button onclick="parent.postMessage('close', '*')" class="bg-white hover:bg-slate-50 border border-gray-200 text-gray-700 shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer flex items-center justify-center" style="font-size: 36px; font-weight: 600; padding: 12px 30px; line-height: 1; border-radius: 20px;">
+      <button onclick="parent.postMessage('close', '*')" class="bg-white hover:bg-slate-50 border border-gray-200 text-gray-700 shadow-sm hover:shadow active:scale-95 transition-all cursor-pointer flex items-center justify-center" style="font-size: 36px; font-weight: 600; background-color: #ffffff; padding: 12px 30px; line-height: 1; border-radius: 20px;">
         닫기
       </button>
     </div>
@@ -75,28 +75,28 @@
         
         <!-- Header title of the measurement widget with sensitivity slider -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-1 w-full shrink-0">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-50 text-brand-main shrink-0">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-50 text-brand-main shrink-0">
               <!-- Speaker/Volume Icon -->
-              <svg class="w-5 h-5 text-[#0052E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg class="w-6 h-6 text-[#0052E0]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                 <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                 <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
               </svg>
             </span>
-            <span style="font-size: 26px;" class="font-extrabold text-slate-800 tracking-tight leading-none text-left">현재 소음 수준</span>
+            <span style="font-size: 34px;" class="font-extrabold text-slate-800 tracking-tight leading-none text-left">현재 소음 수준</span>
           </div>
         </div>
 
         <!-- Current Decibel Indicator (Left) & Vertical Traffic Light Cylinder (Right) -->
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 pt-3 pb-1 w-full overflow-hidden flex-1">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-10 sm:gap-20 pt-3 pb-6 w-full flex-1 overflow-visible">
           
           <!-- Left: Decibel value counters, Badge, and Recommendations -->
           <div class="flex-1 flex flex-col justify-center items-center sm:items-start pl-1 select-none w-full max-w-[280px] -mt-5 sm:-mt-8">
             <!-- Large Decibel indicator -->
             <div class="flex items-baseline gap-3 mt-3 sm:mt-4 mb-1">
-              <span id="db-number" style="font-size: 130px; line-height: 0.85;" class="font-rounded font-extrabold tracking-tighter text-[#1e293b] tabular-nums">36</span>
-              <span style="font-size: 34px;" class="font-extrabold text-[#475569] tracking-tight shrink-0 font-rounded">dB</span>
+              <span id="db-number" style="font-size: 104px; line-height: 0.85;" class="font-rounded font-extrabold tracking-tighter text-[#1e293b] tabular-nums">36</span>
+              <span style="font-size: 28px;" class="font-extrabold text-[#475569] tracking-tight shrink-0 font-rounded">dB</span>
             </div>
 
             <!-- Dynamic sound warning status badge -->
@@ -203,13 +203,13 @@
       <!-- WAVEFORM CHART (실시간 음파) -->
       <div class="glass-card rounded-[24px] pt-5 pb-4 px-5 relative min-h-[90px] flex flex-col justify-between overflow-hidden">
         <div class="flex justify-between items-center mb-3 px-5">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-9 h-9 rounded-full bg-[#31B272]/10 text-[#31B272] shrink-0">
+          <div class="flex items-center gap-3">
+            <span class="flex items-center justify-center w-10 h-10 rounded-full bg-[#31B272]/10 text-[#31B272] shrink-0">
               <svg class="w-6 h-6 animate-pulse text-[#31B272]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 13h2l2-9 4 17 4-13 2 5h2" />
               </svg>
             </span>
-            <span style="font-size: 28px;" class="font-bold text-slate-700">실시간 음파</span>
+            <span style="font-size: 34px;" class="font-extrabold text-slate-800 tracking-tight leading-none">실시간 음파</span>
           </div>
         </div>
 
@@ -249,8 +249,8 @@
 
               <!-- Leading flashing signal dot -->
               <g id="svg-wave-pulsing-dot-group" transform="translate(12, 105)">
-                <circle cx="0" cy="0" r="5" fill="#006CFF" class="pulse-core"></circle>
-                <circle cx="0" cy="0" r="10" fill="none" stroke="#006CFF" stroke-width="2" class="pulse-glow animate-ping opacity-40"></circle>
+                <circle cx="0" cy="0" r="10" fill="#006CFF" class="pulse-core"></circle>
+                <circle cx="0" cy="0" r="20" fill="none" stroke="#006CFF" stroke-width="4" class="pulse-glow animate-ping opacity-40"></circle>
               </g>
             </svg>
           </div>
@@ -259,20 +259,29 @@
 
       <!-- THREE COLUMNS SUMMARY STATS CARDS -->
       <div class="grid grid-cols-3 gap-3">
-         <!-- Minimum -->
-        <div class="glass-card rounded-[22px] p-2 flex flex-col items-center justify-center text-center h-[120px]">
-          <span class="text-[22px] font-semibold text-slate-500 leading-none">최소</span>
-          <div id="stat-min-text" class="font-black text-blue-500 font-rounded mt-2 text-3xl" style="line-height: 1;">32 <span style="font-size: 16px;" class="font-normal text-slate-400">dB</span></div>
+        <!-- Minimum -->
+        <div class="glass-card rounded-[22px] px-4 py-2 flex flex-row items-center justify-center gap-3 text-center h-[96px]">
+          <span style="font-size: 24px;" class="font-bold text-slate-500 leading-none">최소</span>
+          <span class="text-slate-300 font-normal" style="font-size: 24px;">|</span>
+          <div id="stat-min-text" class="font-black text-blue-500 font-rounded text-3xl flex items-baseline gap-1" style="line-height: 1;">
+            32 <span style="font-size: 18px;" class="font-bold text-slate-400">dB</span>
+          </div>
         </div>
         <!-- Maximum -->
-        <div class="glass-card rounded-[22px] p-2 flex flex-col items-center justify-center text-center h-[120px]">
-          <span class="text-[22px] font-semibold text-slate-500 leading-none">최고</span>
-          <div id="stat-max-text" class="font-black text-red-500 font-rounded mt-2 text-3xl" style="line-height: 1;">58 <span style="font-size: 16px;" class="font-normal text-slate-400">dB</span></div>
+        <div class="glass-card rounded-[22px] px-4 py-2 flex flex-row items-center justify-center gap-3 text-center h-[96px]">
+          <span style="font-size: 24px;" class="font-bold text-slate-500 leading-none">최고</span>
+          <span class="text-slate-300 font-normal" style="font-size: 24px;">|</span>
+          <div id="stat-max-text" class="font-black text-red-500 font-rounded text-3xl flex items-baseline gap-1" style="line-height: 1;">
+            58 <span style="font-size: 18px;" class="font-bold text-slate-400">dB</span>
+          </div>
         </div>
         <!-- Average -->
-        <div class="glass-card rounded-[22px] p-2 flex flex-col items-center justify-center text-center h-[120px]">
-          <span class="text-[22px] font-semibold text-slate-500 leading-none">평균</span>
-          <div id="stat-avg-text" class="font-black text-brand-main font-rounded mt-2 text-3xl" style="line-height: 1;">42 <span style="font-size: 16px;" class="font-normal text-slate-400">dB</span></div>
+        <div class="glass-card rounded-[22px] px-4 py-2 flex flex-row items-center justify-center gap-3 text-center h-[96px]">
+          <span style="font-size: 24px;" class="font-bold text-slate-500 leading-none">평균</span>
+          <span class="text-slate-300 font-normal" style="font-size: 24px;">|</span>
+          <div id="stat-avg-text" class="font-black text-brand-main font-rounded text-3xl flex items-baseline gap-1" style="line-height: 1;">
+            42 <span style="font-size: 18px;" class="font-bold text-slate-400">dB</span>
+          </div>
         </div>
       </div>
 
@@ -282,18 +291,21 @@
     <div class="w-full bg-[#EBF4FF] pt-0 pb-4 px-5 flex flex-col items-center gap-1 shrink-0 z-50">
       <div class="relative w-full overflow-visible py-0 flex items-center justify-center">
         <!-- Pulse animation outward overlays -->
-        <div id="toggle-ripple-1" class="absolute inset-x-0 inset-y-1 bg-[#0052E0]/15 animate-ripple-1 pointer-events-none" style="border-radius: 32px;"></div>
-        <div id="toggle-ripple-2" class="absolute inset-x-0 inset-y-1 bg-[#02b3c2]/10 animate-ripple-2 pointer-events-none" style="border-radius: 32px;"></div>
+        <div id="toggle-ripple-1" class="absolute inset-x-0 inset-y-1 bg-[#0052E0]/30 animate-ripple-1 pointer-events-none" style="border-radius: 32px;"></div>
+        <div id="toggle-ripple-2" class="absolute inset-x-0 inset-y-1 bg-[#02b3c2]/25 animate-ripple-2 pointer-events-none" style="border-radius: 32px;"></div>
 
         <!-- Custom Action Start/Stop Toggle button -->
-        <button id="toggle-btn" class="w-full flex items-center justify-center hover:shadow-lg active:scale-[0.98] transition-all duration-300 relative overflow-hidden animate-gradient-mint-blue text-white shadow-[0_12px_30px_rgba(2,179,194,0.35)] cursor-pointer" style="height: 240px; border-radius: 32px;">
+        <button id="toggle-btn" class="w-full flex items-center justify-center hover:shadow-lg active:scale-[0.98] transition-all duration-300 relative overflow-hidden animate-gradient-mint-blue text-white shadow-[0_12px_35px_rgba(2,179,194,0.45)] cursor-pointer" style="height: 240px; border-radius: 32px;" data-playing="true">
           <div class="flex items-center relative z-10 text-white" style="gap: 24px;">
-            <!-- SVG Pause Icon -->
-            <svg class="w-10 h-10 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24" style="width: 48px; height: 48px;">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-            </svg>
-            <span style="border-left: 2px solid rgba(255,255,255,0.3); height: 48px;" class="shrink-0"></span>
             <span style="font-size: 52px; font-weight: 600;" class="tracking-tight leading-none shrink-0 border-none">측정 중</span>
+            <!-- Voice Recognition Audio Visualizer (3~5 vertical round bars) -->
+            <div class="flex items-center gap-[9px] select-none text-white shrink-0" style="height: 56px; padding-left: 4px;">
+              <span id="vbar-1" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+              <span id="vbar-2" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+              <span id="vbar-3" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+              <span id="vbar-4" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+              <span id="vbar-5" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+            </div>
           </div>
           <span class="absolute inset-0 bg-white/10 animate-breath pointer-events-none z-[1]"></span>
         </button>

@@ -487,42 +487,53 @@ function updateUI() {
   if (statMaxText) statMaxText.innerHTML = `${stats.max} <span style="font-size: 20px;" class="font-normal text-slate-400">dB</span>`;
   if (statAvgText) statAvgText.innerHTML = `${stats.average} <span style="font-size: 20px;" class="font-normal text-slate-400">dB</span>`;
 
-  // 7. Update bottom action button classes and labels
+  // 7. Update bottom action button classes, labels, and 5-bar voice visualizer
   const toggleBtn = document.getElementById('toggle-btn');
   const toggleRipple1 = document.getElementById('toggle-ripple-1');
   const toggleRipple2 = document.getElementById('toggle-ripple-2');
   if (toggleBtn) {
     toggleBtn.style.height = "240px";
     toggleBtn.style.borderRadius = "32px";
-    if (isPlaying) {
-      toggleBtn.className = "w-full flex items-center justify-center hover:shadow-lg active:scale-[0.98] transition-all duration-300 relative overflow-hidden animate-gradient-mint-blue text-white shadow-[0_12px_30px_rgba(2,179,194,0.35)] cursor-pointer";
+    
+    // Prevent rewriting innerHTML continuously on every frame; only rewrite on layout switch
+    const isCurrentlyPlayingLayout = toggleBtn.getAttribute('data-playing') === 'true';
+    if (isPlaying && (!isCurrentlyPlayingLayout || !document.getElementById('vbar-1'))) {
+      toggleBtn.setAttribute('data-playing', 'true');
+      toggleBtn.className = "w-full flex items-center justify-center hover:shadow-lg active:scale-[0.98] transition-all duration-300 relative overflow-hidden animate-gradient-mint-blue text-white shadow-[0_12px_35px_rgba(2,179,194,0.45)] cursor-pointer";
       toggleBtn.innerHTML = `
         <div class="flex items-center relative z-10 text-white" style="gap: 24px;">
-          <!-- SVG Pause Icon -->
-          <svg class="w-10 h-10 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24" style="width: 48px; height: 48px;">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-          </svg>
-          <span style="border-left: 2px solid rgba(255,255,255,0.3); height: 48px;" class="shrink-0"></span>
           <span style="font-size: 52px; font-weight: 600;" class="tracking-tight leading-none shrink-0 border-none">측정 중</span>
+          <!-- Voice Recognition Audio Visualizer (3~5 vertical round bars) -->
+          <div class="flex items-center gap-[9px] select-none text-white shrink-0" style="height: 56px; padding-left: 4px;">
+            <span id="vbar-1" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+            <span id="vbar-2" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+            <span id="vbar-3" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+            <span id="vbar-4" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+            <span id="vbar-5" class="w-[8px] rounded-full bg-white transition-all duration-75" style="height: 12px; min-height: 8px;"></span>
+          </div>
         </div>
         <span class="absolute inset-0 bg-white/10 animate-breath pointer-events-none z-[1]"></span>
       `;
-      if (toggleRipple1) toggleRipple1.classList.remove('hidden');
-      if (toggleRipple2) toggleRipple2.classList.remove('hidden');
-    } else {
+      if (toggleRipple1) toggleRipple1.className = "absolute inset-x-0 inset-y-1 bg-[#0052E0]/30 animate-ripple-1 pointer-events-none";
+      if (toggleRipple2) toggleRipple2.className = "absolute inset-x-0 inset-y-1 bg-[#02b3c2]/25 animate-ripple-2 pointer-events-none";
+    } else if (!isPlaying && (isCurrentlyPlayingLayout || toggleBtn.getAttribute('data-playing') === null)) {
+      toggleBtn.setAttribute('data-playing', 'false');
       toggleBtn.className = "w-full flex items-center justify-center hover:shadow-lg active:scale-[0.98] transition-all duration-300 relative overflow-hidden bg-[#0052E0] text-white shadow-[0_14px_30px_rgba(0,82,224,0.3)] cursor-pointer";
       toggleBtn.innerHTML = `
         <div class="flex items-center relative z-10 text-white" style="gap: 24px;">
-          <!-- SVG Play Icon -->
-          <svg class="w-10 h-10 text-white shrink-0" fill="currentColor" viewBox="0 0 24 24" style="width: 48px; height: 48px;">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          <span style="border-left: 2px solid rgba(255,255,255,0.25); height: 48px;" class="shrink-0"></span>
           <span style="font-size: 52px; font-weight: 600;" class="tracking-tight leading-none shrink-0 border-none">측정 시작</span>
+          <!-- Paused visualizer dots -->
+          <div class="flex items-center gap-[9px] select-none text-white/50 shrink-0" style="height: 56px; padding-left: 4px;">
+            <span class="w-[8px] h-2 rounded-full bg-white/70"></span>
+            <span class="w-[8px] h-2 rounded-full bg-white/70"></span>
+            <span class="w-[8px] h-2 rounded-full bg-white/70"></span>
+            <span class="w-[8px] h-2 rounded-full bg-white/70"></span>
+            <span class="w-[8px] h-2 rounded-full bg-white/70"></span>
+          </div>
         </div>
       `;
-      if (toggleRipple1) toggleRipple1.classList.add('hidden');
-      if (toggleRipple2) toggleRipple2.classList.add('hidden');
+      if (toggleRipple1) toggleRipple1.className = "absolute inset-x-0 inset-y-1 bg-[#0052E0]/30 animate-ripple-1 pointer-events-none hidden";
+      if (toggleRipple2) toggleRipple2.className = "absolute inset-x-0 inset-y-1 bg-[#02b3c2]/25 animate-ripple-2 pointer-events-none hidden";
     }
   }
 }
@@ -634,6 +645,25 @@ function drawLiveWavechart() {
     const circle2 = svgWavePulsingDotG.querySelector('.pulse-glow');
     if (circle1) circle1.setAttribute('fill', color);
     if (circle2) circle2.setAttribute('stroke', color);
+  }
+
+  // Dynamic audio visualizer active bar rendering (3~5 vertical round bars)
+  if (isPlaying) {
+    const volumeFactor = Math.max(0, (currentDb - 20) / 80); // normalized [0.0 - 1.0]
+    for (let i = 1; i <= 5; i++) {
+      const vbarElement = document.getElementById(`vbar-${i}`);
+      if (vbarElement) {
+        const phaseOffset = i * 0.95;
+        // Bouncing sine wave that matches the current volume profile
+        const sineVal = Math.sin(wavePhase * 1.8 + phaseOffset) * 0.5 + 0.5; // [0.0 - 1.0]
+        
+        // Base height is 8px. Maximum height expansion is 44px
+        const maxVarHeight = 44;
+        const targetHeight = 8 + (volumeFactor * maxVarHeight * (0.3 + sineVal * 0.7));
+        
+        vbarElement.style.height = `${Math.max(8, Math.min(52, targetHeight))}px`;
+      }
+    }
   }
 }
 
